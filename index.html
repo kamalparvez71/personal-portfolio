@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════╗
+  ║          NETLIFY DEPLOYMENT SETTINGS                 ║
+  ║  Build command   : (leave empty)                     ║
+  ║  Publish dir     : . (dot — the root folder)         ║
+  ║  No npm, no build step required.                     ║
+  ║  Just drag-and-drop this file onto Netlify.          ║
+  ╚══════════════════════════════════════════════════════╝
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kamal Parvez — Full-Stack Developer</title>
+  <meta name="description" content="Kamal Parvez is a Full-Stack Developer specializing in React, Node.js, and cloud infrastructure. Building fast, scalable, and beautiful web applications." />
+  <meta property="og:title" content="Kamal Parvez — Full-Stack Developer" />
+  <meta property="og:description" content="Full-Stack Developer building fast, scalable, and beautiful web applications." />
+  <meta property="og:image" content="https://placehold.co/1200x630/0f172a/3b82f6?text=Alex+Morgan" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              950: '#020817',
+              900: '#0a1628',
+              800: '#0f2040',
+              700: '#152a52',
+            },
+            blue: {
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+            }
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s ease-in-out infinite',
+            'spin-slow': 'spin 20s linear infinite',
+            'fade-up': 'fadeUp 0.6s ease forwards',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+            fadeUp: {
+              from: { opacity: '0', transform: 'translateY(30px)' },
+              to: { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: #020817;
+      color: #e2e8f0;
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── CANVAS PARTICLES ── */
+    #particles-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── GRID OVERLAY ── */
+    .grid-overlay {
+      background-image:
+        linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ── GLOW EFFECTS ── */
+    .glow-blue {
+      box-shadow: 0 0 40px rgba(59,130,246,0.15), 0 0 80px rgba(59,130,246,0.05);
+    }
+    .glow-text {
+      text-shadow: 0 0 40px rgba(59,130,246,0.4);
+    }
+    .border-glow {
+      border: 1px solid rgba(59,130,246,0.2);
+      box-shadow: inset 0 0 20px rgba(59,130,246,0.03), 0 0 20px rgba(59,130,246,0.05);
+    }
+
+    /* ── NAV ── */
+    nav {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(2, 8, 23, 0.8);
+      border-bottom: 1px solid rgba(59,130,246,0.1);
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-radius: 6px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #60a5fa, #3b82f6);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,0.3); }
+    .btn-primary span { position: relative; z-index: 1; }
+
+    .btn-outline {
+      border: 1px solid rgba(59,130,246,0.4);
+      color: #93c5fd;
+      font-family: 'Syne', sans-serif;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: all 0.25s ease;
+      background: transparent;
+    }
+    .btn-outline:hover {
+      border-color: #3b82f6;
+      background: rgba(59,130,246,0.08);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* ── CARDS ── */
+    .project-card {
+      background: rgba(15, 32, 64, 0.5);
+      border: 1px solid rgba(59,130,246,0.12);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(59,130,246,0.05), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .project-card:hover {
+      border-color: rgba(59,130,246,0.35);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(59,130,246,0.1);
+    }
+    .project-card:hover::before { opacity: 1; }
+
+    .skill-badge {
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.18);
+      color: #93c5fd;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 999px;
+      transition: all 0.2s ease;
+    }
+    .skill-badge:hover {
+      background: rgba(59,130,246,0.15);
+      border-color: rgba(59,130,246,0.4);
+      color: #bfdbfe;
+    }
+
+    .tech-badge {
+      background: rgba(30,41,59,0.8);
+      border: 1px solid rgba(148,163,184,0.12);
+      color: #94a3b8;
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline-item { position: relative; padding-left: 2rem; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: -2rem;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(59,130,246,0.4), rgba(59,130,246,0.05));
+    }
+    .timeline-item:last-child::before { display: none; }
+    .timeline-dot {
+      position: absolute;
+      left: -5px;
+      top: 6px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #3b82f6;
+      border: 2px solid #020817;
+      box-shadow: 0 0 10px rgba(59,130,246,0.5);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── FORM ── */
+    .form-input {
+      background: rgba(15,32,64,0.5);
+      border: 1px solid rgba(59,130,246,0.15);
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      width: 100%;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+    }
+    .form-input::placeholder { color: #475569; }
+    .form-input:focus {
+      border-color: rgba(59,130,246,0.5);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.08);
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #3b82f6;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+    }
+
+    /* ── MOBILE MENU ── */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── HERO NUMBER COUNTER ── */
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: #3b82f6;
+      line-height: 1;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #020817; }
+    ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.3); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(59,130,246,0.5); }
+  </style>
+</head>
+
+<body class="antialiased">
+
+<!-- ═══════════════════════════════════════
+  NAVIGATION
+════════════════════════════════════════ -->
+<nav class="fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center gap-2 group">
+      <div class="w-9 h-9 rounded-lg bg-blue-500 flex items-center justify-center font-display font-800 text-white text-sm font-bold group-hover:bg-blue-400 transition-colors">
+        AM
+      </div>
+      <span class="font-display font-700 text-white text-lg tracking-tight hidden sm:block" style="font-family:'Syne',sans-serif;font-weight:700;">Alex<span class="text-blue-400">.</span></span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#about" class="text-sm text-slate-400 hover:text-white transition-colors font-medium" style="font-family:'DM Sans',sans-serif;">About</a>
+      <a href="#projects" class="text-sm text-slate-400 hover:text-white transition-colors font-medium" style="font-family:'DM Sans',sans-serif;">Projects</a>
+      <a href="#experience" class="text-sm text-slate-400 hover:text-white transition-colors font-medium" style="font-family:'DM Sans',sans-serif;">Experience</a>
+      <a href="#contact" class="text-sm text-slate-400 hover:text-white transition-colors font-medium" style="font-family:'DM Sans',sans-serif;">Contact</a>
+      <a href="#" class="btn-outline text-sm px-4 py-2 flex items-center gap-2">
+        <i data-lucide="download" style="width:14px;height:14px;"></i>
+        <span>Resume</span>
+      </a>
+    </div>
+
+    <!-- Mobile Hamburger -->
+    <button id="menu-btn" class="md:hidden text-slate-400 hover:text-white transition-colors p-1" aria-label="Toggle menu">
+      <i data-lucide="menu" style="width:22px;height:22px;" id="menu-icon"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden border-t border-blue-900/20 bg-navy-950/95 backdrop-blur-xl">
+    <div class="px-6 py-4 flex flex-col gap-4">
+      <a href="#about" class="text-slate-300 hover:text-white py-2 text-sm font-medium transition-colors" onclick="closeMobileMenu()">About</a>
+      <a href="#projects" class="text-slate-300 hover:text-white py-2 text-sm font-medium transition-colors" onclick="closeMobileMenu()">Projects</a>
+      <a href="#experience" class="text-slate-300 hover:text-white py-2 text-sm font-medium transition-colors" onclick="closeMobileMenu()">Experience</a>
+      <a href="#contact" class="text-slate-300 hover:text-white py-2 text-sm font-medium transition-colors" onclick="closeMobileMenu()">Contact</a>
+      <a href="#" class="btn-outline text-sm px-4 py-2 flex items-center gap-2 w-fit">
+        <i data-lucide="download" style="width:14px;height:14px;"></i>
+        <span>Resume</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════
+  HERO
+════════════════════════════════════════ -->
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden grid-overlay">
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Ambient blobs -->
+  <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-10 animate-pulse-slow"
+       style="background: radial-gradient(circle, #3b82f6, transparent 70%); filter: blur(60px); transform: translate(-50%,-50%);"></div>
+  <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-8 animate-pulse-slow"
+       style="background: radial-gradient(circle, #1d4ed8, transparent 70%); filter: blur(80px); animation-delay: 2s;"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6 py-24 text-center">
+    <!-- Status pill -->
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/5 text-blue-400 text-sm mb-8 animate-fade-up" style="animation-delay:0.1s; font-family:'DM Sans',sans-serif;">
+      <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse inline-block"></span>
+      Available for new opportunities
+    </div>
+
+    <!-- Name -->
+    <h1 class="section-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4 leading-none tracking-tight animate-fade-up glow-text" style="animation-delay:0.2s;">
+      Kamal Parvez
+    </h1>
+
+    <!-- Title -->
+    <div class="flex items-center justify-center gap-3 mb-6 animate-fade-up" style="animation-delay:0.3s;">
+      <div class="h-px w-12 bg-blue-500/40"></div>
+      <p class="text-blue-400 font-display text-lg sm:text-xl tracking-widest uppercase font-600" style="font-family:'Syne',sans-serif;font-weight:600;letter-spacing:0.2em;">Full-Stack Developer</p>
+      <div class="h-px w-12 bg-blue-500/40"></div>
+    </div>
+
+    <!-- Tagline -->
+    <p class="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-up" style="animation-delay:0.4s; font-family:'DM Sans',sans-serif;font-weight:300;">
+      I craft performant web applications — from pixel-perfect interfaces<br class="hidden sm:block" /> to battle-tested backend systems that scale.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style="animation-delay:0.5s;">
+      <a href="#projects" class="btn-primary px-7 py-3 text-sm flex items-center gap-2">
+        <span>View Projects</span>
+        <i data-lucide="arrow-down" style="width:15px;height:15px;position:relative;z-index:1;"></i>
+      </a>
+      <a href="#contact" class="btn-outline px-7 py-3 text-sm flex items-center gap-2">
+        <i data-lucide="mail" style="width:15px;height:15px;"></i>
+        Contact Me
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex flex-wrap items-center justify-center gap-12 mt-20 animate-fade-up" style="animation-delay:0.7s;">
+      <div class="text-center">
+        <div class="stat-number">6+</div>
+        <div class="text-slate-500 text-xs mt-1 tracking-wider uppercase" style="font-family:'DM Sans',sans-serif;">Years exp.</div>
+      </div>
+      <div class="w-px h-10 bg-slate-800"></div>
+      <div class="text-center">
+        <div class="stat-number">10+</div>
+        <div class="text-slate-500 text-xs mt-1 tracking-wider uppercase" style="font-family:'DM Sans',sans-serif;">Projects shipped</div>
+      </div>
+      <div class="w-px h-10 bg-slate-800"></div>
+      <div class="text-center">
+        <div class="stat-number">7+</div>
+        <div class="text-slate-500 text-xs mt-1 tracking-wider uppercase" style="font-family:'DM Sans',sans-serif;">Happy clients</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600 animate-float">
+    <span class="text-xs tracking-widest uppercase" style="font-family:'DM Sans',sans-serif;">Scroll</span>
+    <i data-lucide="chevron-down" style="width:16px;height:16px;"></i>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+  ABOUT
+════════════════════════════════════════ -->
+<section id="about" class="py-28 px-6 relative">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+
+      <!-- Left: Bio -->
+      <div class="reveal">
+        <div class="section-label mb-3">About me</div>
+        <h2 class="section-title text-4xl sm:text-5xl text-white mb-6 leading-tight">
+          Building things<br/>for the web<span class="text-blue-400">.</span>
+        </h2>
+        <div class="space-y-4 text-slate-400 leading-relaxed" style="font-family:'DM Sans',sans-serif;font-weight:300;">
+          <p>I'm a full-stack developer with 6+ years of experience designing and shipping production-ready applications — from SaaS platforms to real-time APIs. I thrive at the intersection of clean code and thoughtful UX.</p>
+          <p>My backend work lives in Node.js microservices, PostgreSQL schemas, and GraphQL APIs. On the frontend, I reach for React and Next.js to build interfaces that are fast, accessible, and genuinely enjoyable to use.</p>
+          <p>When I'm not pushing commits, I'm contributing to open-source projects, writing technical deep-dives on my blog, or mentoring junior developers in my community.</p>
+        </div>
+
+        <div class="flex flex-wrap gap-3 mt-8">
+          <a href="#contact" class="btn-primary px-5 py-2.5 text-sm flex items-center gap-2">
+            <span>Get in touch</span>
+          </a>
+          <a href="#" class="btn-outline px-5 py-2.5 text-sm flex items-center gap-2">
+            <i data-lucide="download" style="width:14px;height:14px;"></i>
+            Download CV
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Skills -->
+      <div class="reveal space-y-8" style="transition-delay: 0.15s;">
+
+        <!-- Frontend -->
+        <div class="border-glow rounded-xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
+              <i data-lucide="monitor" style="width:16px;height:16px;color:#3b82f6;"></i>
+            </div>
+            <h3 class="font-display text-white font-600 text-sm tracking-wider uppercase" style="font-family:'Syne',sans-serif;font-weight:600;">Frontend</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge">JavaScript</span>
+            <span class="skill-badge">TypeScript</span>
+            <span class="skill-badge">Angular</span>
+
+            <span class="skill-badge">React.js</span>
+            <span class="skill-badge">Next.js</span>
+            <span class="skill-badge">Redux</span>
+
+            <span class="skill-badge">Tailwind CSS</span>
+            <span class="skill-badge">HTML/CSS</span>
+            <span class="skill-badge">Bootstrap</span>
+
+        
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="border-glow rounded-xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
+              <i data-lucide="server" style="width:16px;height:16px;color:#3b82f6;"></i>
+            </div>
+            <h3 class="font-display text-white font-600 text-sm tracking-wider uppercase" style="font-family:'Syne',sans-serif;font-weight:600;">Backend</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge">Java</span>
+            <span class="skill-badge">Spring Boot/MVC</span>
+            <span class="skill-badge">Maven/Gradle</span>
+
+            <span class="skill-badge">Node.js</span>
+            <span class="skill-badge">Hapi.js/Express.js</span>
+
+            <span class="skill-badge">JPA/Hibernate/JDBC</span>
+            <span class="skill-badge">REST APIs</span>
+
+            <span class="skill-badge">PostgreSQL</span>
+            <span class="skill-badge">Oracle</span>
+            <span class="skill-badge">GraphQL</span>
+
+            <span class="skill-badge">MongoDB</span>
+            <span class="skill-badge">Redis</span>
+
+            <span class="skill-badge">JasperReports</span>
+
+          </div>
+        </div>
+
+        <!-- DevOps -->
+        <div class="border-glow rounded-xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
+              <i data-lucide="cloud" style="width:16px;height:16px;color:#3b82f6;"></i>
+            </div>
+            <h3 class="font-display text-white font-600 text-sm tracking-wider uppercase" style="font-family:'Syne',sans-serif;font-weight:600;">DevOps / Tools</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge">Docker</span>
+            <span class="skill-badge">AWS</span>
+            <span class="skill-badge">CI/CD</span>
+            <span class="skill-badge">Git</span>
+            <span class="skill-badge">GitHub Actions</span>
+            <span class="skill-badge">Linux</span>
+            <span class="skill-badge">Nginx</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+  PROJECTS
+════════════════════════════════════════ -->
+<section id="projects" class="py-28 px-6 relative">
+  <!-- Section divider -->
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
+
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <div class="section-label mb-3">Featured work</div>
+      <h2 class="section-title text-4xl sm:text-5xl text-white">Projects<span class="text-blue-400">.</span></h2>
+      <p class="text-slate-500 mt-4 max-w-md mx-auto" style="font-family:'DM Sans',sans-serif;font-weight:300;">A selection of things I've built and shipped.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Project 1 -->
+      <div class="project-card p-6 flex flex-col reveal">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+            <i data-lucide="shopping-cart" style="width:20px;height:20px;color:#3b82f6;"></i>
+          </div>
+          <div class="flex gap-2">
+            <a href="#" class="text-slate-500 hover:text-blue-400 transition-colors" title="GitHub">
+              <i data-lucide="github" style="width:18px;height:18px;"></i>
+            </a>
+            <a href="#" class="text-slate-500 hover:text-blue-400 transition-colors" title="Live Demo">
+              <i data-lucide="external-link" style="width:18px;height:18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <h3 class="text-white font-display font-600 text-lg mb-2" style="font-family:'Syne',sans-serif;font-weight:600;">ShopStream</h3>
+        <p class="text-slate-400 text-sm leading-relaxed flex-1 mb-5" style="font-family:'DM Sans',sans-serif;font-weight:300;">
+          A full-featured e-commerce platform with real-time inventory, Stripe payments, and an admin dashboard. Handles 50k+ daily transactions with sub-200ms API response times.
+        </p>
+
+        <div class="flex flex-wrap gap-1.5">
+          <span class="tech-badge">Next.js</span>
+          <span class="tech-badge">TypeScript</span>
+          <span class="tech-badge">PostgreSQL</span>
+          <span class="tech-badge">Redis</span>
+          <span class="tech-badge">Stripe</span>
+          <span class="tech-badge">Docker</span>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card p-6 flex flex-col reveal" style="transition-delay:0.1s;">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+            <i data-lucide="message-square" style="width:20px;height:20px;color:#3b82f6;"></i>
+          </div>
+          <div class="flex gap-2">
+            <a href="#" class="text-slate-500 hover:text-blue-400 transition-colors" title="GitHub">
+              <i data-lucide="github" style="width:18px;height:18px;"></i>
+            </a>
+            <a href="#" class="text-slate-500 hover:text-blue-400 transition-colors" title="Live Demo">
+              <i data-lucide="external-link" style="width:18px;height:18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <h3 class="text-white font-display font-600 text-lg mb-2" style="font-family:'Syne',sans-serif;font-weight:600;">Nexus Chat</h3>
+        <p class="text-slate-400 text-sm leading-relaxed flex-1 mb-5" style="font-family:'DM Sans',sans-serif;font-weight:300;">
+          Real-time team messaging app inspired by Slack. Features channels, direct messages, file uploads, emoji reactions, and end-to-end encrypted DMs via WebSockets.
+        </p>
+
+        <div class="flex flex-wrap gap-1.5">
+          <span class="tech-badge">React</span>
+          <span class="tech-badge">Node.js</span>
+          <span class="tech-badge">Socket.io</span>
+          <span class="tech-badge">MongoDB</span>
+          <span class="tech-badge">GraphQL</span>
+          <span class="tech-badge">AWS S3</span>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card p-6 flex flex-col reveal" style="transition-delay:0.2s;">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+            <i data-lucide="bar-chart-2" style="width:20px;height:20px;color:#3b82f6;"></i>
+          </div>
+          <div class="flex gap-2">
+            <a href="#" class="text-slate-500 hover:text-blue-400 transition-colors" title="GitHub">
+              <i data-lucide="github" style="width:18px;height:18px;"></i>
+            </a>
+            <a href="#" class="text-slate-500 hover:text-blue-400 transition-colors" title="Live Demo">
+              <i data-lucide="external-link" style="width:18px;height:18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <h3 class="text-white font-display font-600 text-lg mb-2" style="font-family:'Syne',sans-serif;font-weight:600;">Dataflow Analytics</h3>
+        <p class="text-slate-400 text-sm leading-relaxed flex-1 mb-5" style="font-family:'DM Sans',sans-serif;font-weight:300;">
+          A SaaS analytics dashboard for marketing teams. Aggregates data from 10+ sources, renders live charts, and generates weekly AI-powered insight reports.
+        </p>
+
+        <div class="flex flex-wrap gap-1.5">
+          <span class="tech-badge">Next.js</span>
+          <span class="tech-badge">Express</span>
+          <span class="tech-badge">PostgreSQL</span>
+          <span class="tech-badge">Chart.js</span>
+          <span class="tech-badge">OpenAI API</span>
+          <span class="tech-badge">Vercel</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+  EXPERIENCE
+════════════════════════════════════════ -->
+<section id="experience" class="py-28 px-6 relative">
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
+
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <div class="section-label mb-3">Work history</div>
+      <h2 class="section-title text-4xl sm:text-5xl text-white">Experience<span class="text-blue-400">.</span></h2>
+    </div>
+
+    <div class="space-y-12">
+
+      <!-- Job 1 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="border-glow rounded-xl p-6 ml-2">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+            <div>
+              <h3 class="text-white font-display font-600 text-lg" style="font-family:'Syne',sans-serif;font-weight:600;">Senior Full-Stack Developer</h3>
+              <p class="text-blue-400 text-sm font-medium mt-0.5">Arca Technologies · San Francisco, CA (Remote)</p>
+            </div>
+            <span class="text-slate-500 text-xs border border-slate-700 rounded-full px-3 py-1 whitespace-nowrap self-start sm:self-center" style="font-family:'DM Sans',sans-serif;">2022 — Present</span>
+          </div>
+          <ul class="space-y-2 text-slate-400 text-sm" style="font-family:'DM Sans',sans-serif;font-weight:300;">
+            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1.5">▸</span> Led development of a microservices platform processing 2M+ requests/day, reducing latency by 40%.</li>
+            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1.5">▸</span> Architected and shipped a multi-tenant GraphQL API consumed by 3 internal product teams.</li>
+            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1.5">▸</span> Mentored 4 junior developers, introduced PR review standards and automated testing pipelines.</li>
+            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1.5">▸</span> Migrated legacy monolith to AWS ECS, cutting infrastructure costs by 35%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Job 2 -->
+      <div class="timeline-item reveal" style="transition-delay:0.1s;">
+        <div class="timeline-dot"></div>
+        <div class="border-glow rounded-xl p-6 ml-2">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+            <div>
+              <h3 class="text-white font-display font-600 text-lg" style="font-family:'Syne',sans-serif;font-weight:600;">Full-Stack Developer</h3>
+              <p class="text-blue-400 text-sm font-medium mt-0.5">Meridian Labs · New York, NY</p>
+            </div>
+            <span class="text-slate-500 text-xs border border-slate-700 rounded-full px-3 py-1 whitespace-nowrap self-start sm:self-center" style="font-family:'DM Sans',sans-serif;">2020 — 2022</span>
+          </div>
+          <ul class="space-y-2 text-slate-400 text-sm" style="font-family:'DM Sans',sans-serif;font-weight:300;">
+            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1.5">▸</span> Built and maintained 5 client-facing React applications with TypeScript, each with 99.9% uptime SLAs.</li>
+            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1.5">▸</span> Designed RESTful APIs and PostgreSQL schemas for a healthcare data aggregation platform.</li>
+            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1.5">▸</span> Implemented Redis caching layer that improved dashboard load times by 60%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Job 3 -->
+      <div class="timeline-item reveal" style="transition-delay:0.2s;">
+        <div class="timeline-dot"></div>
+        <div class="border-glow rounded-xl p-6 ml-2">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+            <div>
+              <h3 class="text-white font-display font-600 text-lg" style="font-family:'Syne',sans-serif;font-weight:600;">Junior Web Developer</h3>
+              <p class="text-blue-400 text-sm font-medium mt-0.5">Pixelcraft Studio · Austin, TX</p>
+            </div>
+            <span class="text-slate-500 text-xs border border-slate-700 rounded-full px-3 py-1 whitespace-nowrap self-start sm:self-center" style="font-family:'DM Sans',sans-serif;">2019 — 2020</span>
+          </div>
+          <ul class="space-y-2 text-slate-400 text-sm" style="font-family:'DM Sans',sans-serif;font-weight:300;">
+            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1.5">▸</span> Developed responsive landing pages and marketing sites using React and vanilla JS.</li>
+            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1.5">▸</span> Contributed to a Node.js/Express CMS backend used across 20+ client projects.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+  CONTACT
+════════════════════════════════════════ -->
+<section id="contact" class="py-28 px-6 relative">
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
+
+  <!-- Background glow -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <div class="w-[600px] h-[600px] rounded-full opacity-5"
+         style="background: radial-gradient(circle, #3b82f6, transparent 70%); filter: blur(80px);"></div>
+  </div>
+
+  <div class="max-w-3xl mx-auto relative z-10">
+    <div class="text-center mb-12 reveal">
+      <div class="section-label mb-3">Say hello</div>
+      <h2 class="section-title text-4xl sm:text-5xl text-white mb-4">Get in touch<span class="text-blue-400">.</span></h2>
+      <p class="text-slate-400 max-w-sm mx-auto" style="font-family:'DM Sans',sans-serif;font-weight:300;">Have a project in mind or just want to chat? My inbox is always open.</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="border-glow rounded-2xl p-8 reveal" style="transition-delay:0.1s;">
+      <form id="contact-form" onsubmit="handleSubmit(event)" class="space-y-5">
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-slate-400 text-xs mb-2 tracking-wider uppercase" style="font-family:'DM Sans',sans-serif;">Name</label>
+            <input type="text" name="name" placeholder="John Doe" class="form-input" required />
+          </div>
+          <div>
+            <label class="block text-slate-400 text-xs mb-2 tracking-wider uppercase" style="font-family:'DM Sans',sans-serif;">Email</label>
+            <input type="email" name="email" placeholder="john@example.com" class="form-input" required />
+          </div>
+        </div>
+        <div>
+          <label class="block text-slate-400 text-xs mb-2 tracking-wider uppercase" style="font-family:'DM Sans',sans-serif;">Subject</label>
+          <input type="text" name="subject" placeholder="Project inquiry" class="form-input" />
+        </div>
+        <div>
+          <label class="block text-slate-400 text-xs mb-2 tracking-wider uppercase" style="font-family:'DM Sans',sans-serif;">Message</label>
+          <textarea name="message" placeholder="Tell me about your project…" rows="5" class="form-input resize-none" required></textarea>
+        </div>
+        <button type="submit" id="submit-btn" class="btn-primary w-full py-3.5 text-sm flex items-center justify-center gap-2">
+          <span>Send message</span>
+          <i data-lucide="send" style="width:15px;height:15px;position:relative;z-index:1;" id="send-icon"></i>
+        </button>
+      </form>
+
+      <!-- Success Message -->
+      <div id="success-msg" class="hidden text-center py-10">
+        <div class="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="check" style="width:28px;height:28px;color:#4ade80;"></i>
+        </div>
+        <h3 class="text-white font-display text-xl mb-2" style="font-family:'Syne',sans-serif;font-weight:600;">Message sent!</h3>
+        <p class="text-slate-400 text-sm" style="font-family:'DM Sans',sans-serif;font-weight:300;">Thanks for reaching out. I'll get back to you within 24 hours.</p>
+        <button onclick="resetForm()" class="btn-outline mt-5 px-5 py-2 text-sm">Send another</button>
+      </div>
+    </div>
+
+    <!-- Social Links -->
+    <div class="flex items-center justify-center gap-6 mt-10 reveal" style="transition-delay:0.2s;">
+      <a href="#" class="group flex flex-col items-center gap-2 text-slate-500 hover:text-blue-400 transition-colors">
+        <div class="w-11 h-11 rounded-xl border border-slate-800 group-hover:border-blue-500/30 flex items-center justify-center transition-colors group-hover:bg-blue-500/5">
+          <i data-lucide="github" style="width:20px;height:20px;"></i>
+        </div>
+        <span class="text-xs" style="font-family:'DM Sans',sans-serif;">GitHub</span>
+      </a>
+      <a href="#" class="group flex flex-col items-center gap-2 text-slate-500 hover:text-blue-400 transition-colors">
+        <div class="w-11 h-11 rounded-xl border border-slate-800 group-hover:border-blue-500/30 flex items-center justify-center transition-colors group-hover:bg-blue-500/5">
+          <i data-lucide="linkedin" style="width:20px;height:20px;"></i>
+        </div>
+        <span class="text-xs" style="font-family:'DM Sans',sans-serif;">LinkedIn</span>
+      </a>
+      <a href="#" class="group flex flex-col items-center gap-2 text-slate-500 hover:text-blue-400 transition-colors">
+        <div class="w-11 h-11 rounded-xl border border-slate-800 group-hover:border-blue-500/30 flex items-center justify-center transition-colors group-hover:bg-blue-500/5">
+          <svg style="width:20px;height:20px;fill:currentColor;" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </div>
+        <span class="text-xs" style="font-family:'DM Sans',sans-serif;">Twitter/X</span>
+      </a>
+      <a href="mailto:alex@example.com" class="group flex flex-col items-center gap-2 text-slate-500 hover:text-blue-400 transition-colors">
+        <div class="w-11 h-11 rounded-xl border border-slate-800 group-hover:border-blue-500/30 flex items-center justify-center transition-colors group-hover:bg-blue-500/5">
+          <i data-lucide="mail" style="width:20px;height:20px;"></i>
+        </div>
+        <span class="text-xs" style="font-family:'DM Sans',sans-serif;">Email</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+  FOOTER
+════════════════════════════════════════ -->
+<footer class="border-t border-blue-900/20 py-8 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-md bg-blue-500 flex items-center justify-center font-display font-bold text-white text-xs">AM</div>
+      <span class="text-slate-500 text-sm" style="font-family:'DM Sans',sans-serif;">Kamal Parvez</span>
+    </div>
+    <p class="text-slate-600 text-xs text-center" style="font-family:'DM Sans',sans-serif;">
+      © <span id="footer-year"></span> Kamal Parvez. Designed &amp; built with care.
+    </p>
+    <a href="#hero" class="text-slate-600 hover:text-blue-400 transition-colors text-xs flex items-center gap-1.5" style="font-family:'DM Sans',sans-serif;">
+      Back to top <i data-lucide="arrow-up" style="width:12px;height:12px;"></i>
+    </a>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════
+  SCRIPTS
+════════════════════════════════════════ -->
+<script>
+  // ── Init Lucide icons
+  lucide.createIcons();
+
+  // ── Footer year
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  // ── Mobile menu toggle
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+
+  menuBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('open');
+    mobileMenu.classList.toggle('open');
+    menuIcon.setAttribute('data-lucide', isOpen ? 'menu' : 'x');
+    lucide.createIcons();
+  });
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    menuIcon.setAttribute('data-lucide', 'menu');
+    lucide.createIcons();
+  }
+
+  // ── Scroll reveal (Intersection Observer)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Contact form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('contact-form');
+    const successMsg = document.getElementById('success-msg');
+    form.style.display = 'none';
+    successMsg.classList.remove('hidden');
+    lucide.createIcons();
+  }
+
+  function resetForm() {
+    const form = document.getElementById('contact-form');
+    const successMsg = document.getElementById('success-msg');
+    form.reset();
+    form.style.display = 'block';
+    successMsg.classList.add('hidden');
+  }
+
+  // ── Particle canvas
+  (function initParticles() {
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animId;
+
+    function resize() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+
+    class Particle {
+      constructor() { this.reset(true); }
+      reset(initial = false) {
+        this.x = Math.random() * canvas.width;
+        this.y = initial ? Math.random() * canvas.height : canvas.height + 10;
+        this.size = Math.random() * 1.5 + 0.4;
+        this.speedY = -(Math.random() * 0.4 + 0.1);
+        this.speedX = (Math.random() - 0.5) * 0.15;
+        this.opacity = Math.random() * 0.5 + 0.1;
+        this.life = 0;
+        this.maxLife = Math.random() * 300 + 200;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.life++;
+        if (this.life > this.maxLife || this.y < -10) this.reset();
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity * (1 - this.life / this.maxLife);
+        ctx.fillStyle = '#3b82f6';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function init() {
+      resize();
+      particles = Array.from({ length: 70 }, () => new Particle());
+    }
+
+    function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      animId = requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', () => { resize(); });
+    init();
+    loop();
+  })();
+</script>
+
+</body>
+</html>
